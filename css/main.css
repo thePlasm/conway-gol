@@ -1,0 +1,25 @@
+body {
+	position: relative;
+	margin: 0px;
+}
+#canvas {
+	margin: 0px;
+	padding: 0px;
+	border: 16px solid #888888;
+	border-bottom: 32px solid #888888;
+}
+#wrapper {
+	position: relative;
+	margin:16px;
+}
+#playbutton {
+	height: 32px;
+	width: 96px;
+	background-color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF0000;
+	margin:auto;
+	position: absolute;
+	bottom: 5px;
+	right: 24px;
+}
