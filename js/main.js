@@ -12,6 +12,7 @@ var playing = false;
 var tempalive = [];
 var loop = 0;
 var oddMouseThing = false;
+var button = 0;
 
 function play() {
 	playing = !playing;
@@ -62,12 +63,20 @@ function getMousePos(evt) {
 }
 canvas.addEventListener('mousemove', function(evt) {
     mousePos = getMousePos(evt);
+	if (mousePos.x >= tileSize && mousePos.y >= tileSize && mousePos.x < canvas.width - tileSize && mousePos.y < canvas.height - tileSize) {
+		if (button == 1) {
+			map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 1;
+		}
+		if (button == 3) {
+			map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 0;
+		}
+	}
 }, false);
 canvas.addEventListener('mousedown', function(evt) {
 	if (!playing) {
 		evt = evt || window.event;
 		button = evt.which || evt.button;
-		if (mousePos.x >= tileSize && mousePos.y >= tileSize && mousePos.x <= canvas.width - tileSize && mousePos.y <= canvas.height - tileSize) {
+		if (mousePos.x >= tileSize && mousePos.y >= tileSize && mousePos.x < canvas.width - tileSize && mousePos.y < canvas.height - tileSize) {
 			if (button == 1) {
 				map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 1;
 			}
@@ -76,6 +85,9 @@ canvas.addEventListener('mousedown', function(evt) {
 			}
 		}
 	}
+}, false);
+canvas.addEventListener('mouseup', function(evt) {
+	button = 0;
 }, false);
 
 function update() {
