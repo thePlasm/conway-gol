@@ -1,6 +1,6 @@
 //Canvas initialisation
 var canvas = document.getElementById("canvas");
-var tileSize = 4;
+var tileSize = 6;
 canvas.width = Math.floor((window.innerWidth-80)/tileSize)*tileSize;
 canvas.height = Math.floor((window.innerHeight-80)/tileSize)*tileSize;
 var ctx = canvas.getContext("2d");
