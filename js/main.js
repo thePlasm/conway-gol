@@ -12,6 +12,7 @@ var playing = false;
 var tempalive = [];
 var temparoundmaprow = [];
 var loop = 0;
+var oddMouseThing = false;
 
 function play() {
 	playing = !playing;
@@ -47,10 +48,18 @@ function drawMap() {
 }
 
 function getMousePos(evt) {
-    return {
-        x: evt.clientX - (window.innerWidth - canvas.width)/2 + 8,
-        y: evt.clientY - (window.innerWidth - canvas.width) + 48
-    };
+	if (!oddMouseThing) {
+		return {
+			x: evt.clientX - (window.innerWidth - canvas.width)/2,
+			y: evt.clientY - (window.innerWidth - canvas.width) + 48
+		};
+	}
+	if (oddMouseThing) {
+		return {
+			x: evt.clientX - (window.innerWidth - canvas.width)/2 + 8,
+			y: evt.clientY - (window.innerWidth - canvas.width) + 48
+		};
+	}
 }
 canvas.addEventListener('mousemove', function(evt) {
     mousePos = getMousePos(evt);
