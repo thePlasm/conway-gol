@@ -10,7 +10,6 @@ var tempmaprow = [];
 var mousePos = {x: 0, y: 0};
 var playing = false;
 var tempalive = [];
-var temparoundmaprow = [];
 var loop = 0;
 var oddMouseThing = false;
 
