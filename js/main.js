@@ -11,7 +11,7 @@ var mousePos = {x: 0, y: 0};
 var playing = false;
 var tempalive = [];
 var loop = 0;
-var oddMouseThing = false;
+var oddMouseThing = true;
 var button = 0;
 
 function play() {
