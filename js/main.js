@@ -38,6 +38,8 @@ function record() {
 		encoder = new GIFEncoder();
 		encoder.setRepeat(1);
 		encoder.setFrameRate(fps);
+		encoder.setQuality(1);
+		encoder.setTransparent(null);
 		encoder.start();
 	}
 	if (!recording) {
@@ -116,6 +118,9 @@ canvas.addEventListener('mouseup', function(evt) {
 }, false);
 
 function update() {
+	if (recording) {
+		encoder.addFrame(ctx);
+	}
 	if (playing) {
 		tempalive = [];
 		for (y = 1; y < canvas.height/tileSize - 1; y++) {
@@ -156,9 +161,6 @@ function update() {
 		tempalive.forEach(function (item) {
 			map[item[1]][item[0]] = item[2];
 		});
-	}
-	if (recording) {
-		encoder.addFrame(ctx);
 	}
 }
 
