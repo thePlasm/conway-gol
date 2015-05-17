@@ -14,8 +14,16 @@ Technologies used: HTML5 and Canvas
     </head>
     <body>
 		<div align='center' id='wrapper'>
+			<a id='actualdownload' href='' download>
+				<input type='button' value='Download Recording' id='downloadbutton' hidden>
+			</a>
+			<input type='button' value='Record/Stop Recording' id='recordbutton' onclick='record()'>
 			<input type='button' value='Start/Stop' id='playbutton' onclick='play()'>
 			<canvas id='canvas' oncontextmenu="return false;">Your browser does not support the HTML5 canvas, please update it.</canvas>
+			<script type="text/javascript" src="js/LZWEncoder.js"></script>
+			<script type="text/javascript" src="js/NeuQuant.js"></script>
+			<script type="text/javascript" src="js/GIFEncoder.js"></script>
+			<script type="text/javascript" src="js/b64.js"></script>
 			<script src='js/main.js'></script>
 			<noscript>Your browser does not support JavaScript, please update it.</noscript>
 		</div>
