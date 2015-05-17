@@ -1,5 +1,9 @@
 //Canvas initialisation
 var canvas = document.getElementById("canvas");
+var playbutton = document.getElementById("playbutton");
+var recordbutton = document.getElementById("recordbutton");
+var downloadbutton = document.getElementById("downloadbutton");
+var actualdownload = document.getElementById("actualdownload");
 var tileSize = 6;
 canvas.width = Math.floor((window.innerWidth-80)/tileSize)*tileSize;
 canvas.height = Math.floor((window.innerHeight-80)/tileSize)*tileSize;
@@ -13,6 +17,10 @@ var tempalive = [];
 var loop = 0;
 var oddMouseThing = true;
 var button = 0;
+var recording = false;
+var encoder;
+var binary_gif;
+var data_url;
 
 function play() {
 	playing = !playing;
@@ -23,7 +31,24 @@ function play() {
 		playbutton.style.color = '#FF0000';
 	}
 }
-
+function record() {
+	recording = !recording;
+	if (recording) {
+		recordbutton.style.color = '#00FF00';
+		encoder = new GIFEncoder();
+		encoder.setRepeat(1);
+		encoder.setFrameRate(fps);
+		encoder.start();
+	}
+	if (!recording) {
+		recordbutton.style.color = '#FF0000';
+		encoder.finish();
+		binary_gif = encoder.stream().getData();
+		data_url = 'data:image/gif;base64,' + encode64(binary_gif);
+		downloadbutton.hidden = false;
+		actualdownload.href = data_url;
+	}
+}
 for (y = 0; y < canvas.height/tileSize; y++) {
 	for (x = 0; x < canvas.width/tileSize; x++) {
 		tempmaprow.push(0);
@@ -131,6 +156,9 @@ function update() {
 		tempalive.forEach(function (item) {
 			map[item[1]][item[0]] = item[2];
 		});
+	}
+	if (recording) {
+		encoder.addFrame(ctx);
 	}
 }
 

@@ -23,3 +23,25 @@ body {
 	bottom: 5px;
 	right: 24px;
 }
+#recordbutton {
+	height: 32px;
+	width: 160px;
+	background-color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF0000;
+	margin:auto;
+	position: absolute;
+	bottom: 5px;
+	right: 120px;
+}
+#downloadbutton {
+	height: 32px;
+	width: 160px;
+	background-color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #0000FF;
+	margin:auto;
+	position: absolute;
+	bottom: 5px;
+	right: 280px;
+}
