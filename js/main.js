@@ -6,7 +6,7 @@ var downloadbutton = document.getElementById("downloadbutton");
 var actualdownload = document.getElementById("actualdownload");
 var generationdisplay = document.getElementById("generationdisplay");
 var downloadprogress = document.getElementById("downloadprogress");
-var tileSize = 2;
+var tileSize = 4;
 canvas.width = Math.floor((window.innerWidth-80)/tileSize)*tileSize;
 canvas.height = Math.floor((window.innerHeight-80)/tileSize)*tileSize;
 var ctx = canvas.getContext("2d");
@@ -46,7 +46,7 @@ function record() {
 		recordbutton.style.color = '#00FF00';
 		encoder = new GIF({
 			workers: 5,
-			quality: 10,
+			quality: tileSize,
 			workerScript: 'js/gif.worker.js',
 			repeat: 0
 		});
