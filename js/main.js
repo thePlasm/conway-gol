@@ -70,8 +70,8 @@ function record() {
 		encoder.render();
 	}
 }
-for (y = 0; y < canvas.height/tileSize; y++) {
-	for (x = 0; x < canvas.width/tileSize; x++) {
+for (y = 0; y < canvas.height/tileSize+2; y++) {
+	for (x = 0; x < canvas.width/tileSize+2; x++) {
 		tempmaprow.push(0);
 	}
 	map.push(tempmaprow);
@@ -80,17 +80,11 @@ for (y = 0; y < canvas.height/tileSize; y++) {
 mapy = map.length;
 mapx = map[0].length;
 
-for (y = 0; y < mapy; y++) {
+for (y = 1; y < mapy-1; y++) {
 	tempmaprow = map[y];
-	for (x = 0; x < mapx; x++) {
-		if (tempmaprow[x] == 0) {
-			ctx.fillStyle="#000000";
-			ctx.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
-		}
-		if (tempmaprow[x] == 1) {
-			ctx.fillStyle="#00FF00";
-			ctx.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
-		}
+	for (x = 1; x < mapx-1; x++) {
+		ctx.fillStyle="#000000";
+		ctx.fillRect(x*tileSize-tileSize, y*tileSize-tileSize, tileSize, tileSize);
 	}
 }
 
@@ -110,14 +104,14 @@ function getMousePos(evt) {
 }
 canvas.addEventListener('mousemove', function(evt) {
     mousePos = getMousePos(evt);
-	if (mousePos.x >= tileSize && mousePos.y >= tileSize && mousePos.x < canvas.width - tileSize && mousePos.y < canvas.height - tileSize) {
+	if (mousePos.x+tileSize >= tileSize && mousePos.y+tileSize >= tileSize && mousePos.x < canvas.width && mousePos.y < canvas.height) {
 		if (button == 1) {
-			tempalive.push([Math.floor(mousePos.x/tileSize), Math.floor(mousePos.y/tileSize), 1]);
-			map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 1;
+			tempalive.push([Math.floor(mousePos.x/tileSize+1), Math.floor(mousePos.y/tileSize+1), 1]);
+			map[Math.floor(mousePos.y/tileSize+1)][Math.floor(mousePos.x/tileSize+1)] = 1;
 		}
 		if (button == 3) {
-			tempalive.push([Math.floor(mousePos.x/tileSize), Math.floor(mousePos.y/tileSize), 0]);
-			map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 0;
+			tempalive.push([Math.floor(mousePos.x/tileSize+1), Math.floor(mousePos.y/tileSize+1), 0]);
+			map[Math.floor(mousePos.y/tileSize+1)][Math.floor(mousePos.x/tileSize+1)] = 0;
 		}
 	}
 }, false);
@@ -125,14 +119,14 @@ canvas.addEventListener('mousedown', function(evt) {
 	if (!playing) {
 		evt = evt || window.event;
 		button = evt.which || evt.button;
-		if (mousePos.x >= tileSize && mousePos.y >= tileSize && mousePos.x < canvas.width - tileSize && mousePos.y < canvas.height - tileSize) {
+		if (mousePos.x+tileSize >= tileSize && mousePos.y+tileSize >= tileSize && mousePos.x < canvas.width && mousePos.y < canvas.height) {
 			if (button == 1) {
-				tempalive.push([Math.floor(mousePos.x/tileSize), Math.floor(mousePos.y/tileSize), 1]);
-				map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 1;
+				tempalive.push([Math.floor(mousePos.x/tileSize+1), Math.floor(mousePos.y/tileSize+1), 1]);
+				map[Math.floor(mousePos.y/tileSize+1)][Math.floor(mousePos.x/tileSize+1)] = 1;
 			}
 			if (button == 3) {
-				tempalive.push([Math.floor(mousePos.x/tileSize), Math.floor(mousePos.y/tileSize), 0]);
-				map[Math.floor(mousePos.y/tileSize)][Math.floor(mousePos.x/tileSize)] = 0;
+				tempalive.push([Math.floor(mousePos.x/tileSize+1), Math.floor(mousePos.y/tileSize+1), 0]);
+				map[Math.floor(mousePos.y/tileSize+1)][Math.floor(mousePos.x/tileSize+1)] = 0;
 			}
 		}
 	}
@@ -145,11 +139,11 @@ function draw() {
 	tempalive.forEach(function (item) {	
 		if (item[2] == 0) {
 			ctx.fillStyle="#000000";
-			ctx.fillRect(item[0]*tileSize, item[1]*tileSize, tileSize, tileSize);
+			ctx.fillRect(item[0]*tileSize-tileSize, item[1]*tileSize-tileSize, tileSize, tileSize);
 		}
 		if (item[2] == 1) {
 			ctx.fillStyle="#00FF00";
-			ctx.fillRect(item[0]*tileSize,item[1]*tileSize,tileSize,tileSize);
+			ctx.fillRect(item[0]*tileSize-tileSize,item[1]*tileSize-tileSize,tileSize,tileSize);
 		}
 	});
 	if (recording) {
@@ -162,8 +156,8 @@ function update() {
 	if (playing) {
 		generation++;
 		generationdisplay.innerHTML = 'Generation: ' + generation;
-		for (y = 1; y < canvas.height/tileSize - 1; y++) {
-			for (x = 1; x < canvas.width/tileSize - 1; x++) {
+		for (y = 1; y < canvas.height/tileSize + 1; y++) {
+			for (x = 1; x < canvas.width/tileSize + 1; x++) {
 				around = 0;
 				if (map[y-1][x] == 1) {
 					around++;
