@@ -10,7 +10,6 @@ var tileSize = 4;
 canvas.width = Math.floor((window.innerWidth-80)/tileSize)*tileSize;
 canvas.height = Math.floor((window.innerHeight-80)/tileSize)*tileSize;
 var ctx = canvas.getContext("2d");
-var fps = 60;
 var map = [];
 var mapx = 0;
 var mapy = 0;
@@ -150,6 +149,7 @@ function draw() {
 		encoder.addFrame(canvas, {delay: 1000/fps, copy: true});
 	}
 	tempalive = [];
+	window.requestAnimationFrame(update);
 }
 
 function update() {
@@ -195,9 +195,6 @@ function update() {
 			map[item[1]][item[0]] = item[2];
 		});
 	}
-}
-
-loop = setInterval(function() {
-	update();
 	draw();
-}, 1000/fps);
+}
+window.requestAnimationFrame(update);
